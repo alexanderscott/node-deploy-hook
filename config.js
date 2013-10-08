@@ -15,6 +15,6 @@ module.exports = {
         }
     },
     port: 8888,
-    defaultProject: 'myproject'
+    serverRoot: '/var/www/'
 
 };

@@ -7,16 +7,25 @@ Install
 -----------------------
 Follow the instructions [here](https://gist.github.com/oodavid/1809044) to set up your remote web-server root, deploy user ssh access, and service hooks.
 
-Clone the repo as www-data (for nginx) or apache user.
-`cd /var/www`
+Install the stable npm version
+`npm install --save node-deploy-hook`
+
+Install the development version
+`git clone https://github.com/alexanderscott/node-deploy-hook` 
+`cd node-deploy-hook && npm install`
+
+Install the repo as www-data (for nginx) or apache user.
+`sudo -Hu www-data npm install --save node-deploy-hook`
+    or
 `sudo -Hu www-data git clone https://github.com/alexanderscott/node-deploy-hook` 
+`cd node-deploy-hook && sudo -Hu www-data npm install`
 
 
 Add as a proxy to the deployment project's vhost in nginx or apache.
 For example in nginx, you could add:
 
     location /deploy/ {
-        proxy_pass http://127.0.0.1:8888?project=MyProjectDirectoryName;
+        proxy_pass http://127.0.0.1:8888/deploy?project=MyProjectName&remote_branch=origin&local_branch=master;
     }
 
 
