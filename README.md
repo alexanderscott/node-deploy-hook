@@ -1,0 +1,32 @@
+node-deploy-hook
+=======================
+A super simple, lightweight Node.JS deployer to be used with Bitbucket or Github POST service hooks.
+
+
+Install
+-----------------------
+Follow the instructions [here](https://gist.github.com/oodavid/1809044) to set up your remote web-server root, deploy user ssh access, and service hooks.
+
+Clone the repo as www-data (for nginx) or apache user.
+`cd /var/www`
+`sudo -Hu www-data git clone https://github.com/alexanderscott/node-deploy-hook` 
+
+
+Add as a proxy to the deployment project's vhost in nginx or apache.
+For example in nginx, you could add:
+
+    location /deploy/ {
+        proxy_pass http://127.0.0.1:8888?project=MyProjectDirectoryName;
+    }
+
+
+Run
+-----------------------
+Start the server as www-data or apache user.
+`cd /var/www/node-deploy-hook`
+`sudo -Hu www-data nohup node deploy.js > ./log/deploy.log 2>&1&`
+
+
+Contribute
+-----------------------
+Fork + Pull-Request, please.
