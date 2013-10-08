@@ -58,7 +58,7 @@ app.all("/deploy", function(req, res){
         localBranch = req.params.local_branch || 'master',
         deployJSON;
 
-    var deploy = childprocess.exec("cd "+projectDirName+" && git pull "+remoteBranch+" "+localBranch, function(err, stdout, stderr){
+    var deploy = childprocess.exec("cd "+projectDir+" && git pull "+remoteBranch+" "+localBranch, function(err, stdout, stderr){
         if(err){
             deployJSON = { subject: subjectOnError, message: "Error pulling down remote repository:: \n"+err, error: true  };
             if(config.email.sendOnError) sendMail( deployJSON );
