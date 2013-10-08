@@ -60,10 +60,10 @@ app.all("/deploy", function(req, res){
 
     var deploy = childprocess.exec("cd "+projectDir+" && git pull "+remoteBranch+" "+localBranch, function(err, stdout, stderr){
         if(err){
-            deployJSON = { subject: subjectOnError, message: "Error pulling down remote repository:: \n"+err, error: true  };
+            deployJSON = { subject: config.email.subjectOnError, message: "Error pulling down remote repository:: \n"+err, error: true  };
             if(config.email.sendOnError) sendMail( deployJSON );
         } else {
-            deployJSON = { subject: subjectOnSuccess, message: "Success pulling down remote repository:: \n"+stdout, success: true };
+            deployJSON = { subject: config.email.subjectOnSuccess, message: "Success pulling down remote repository:: \n"+stdout, success: true };
             if(config.email.sendOnSuccess) sendMail( deployJSON );
         }
 
@@ -71,4 +71,4 @@ app.all("/deploy", function(req, res){
     });
 });
 
-console.log((new Date()).toString()+ ":: Node-deploy-hook server listening on port::", server.address().port, ", environment:: ", app.settings.env);
+console.log((new Date()).toString()+ ":: Node-deploy-hook server listening on port::", config.port, ", environment:: ", app.settings.env);
