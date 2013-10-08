@@ -33,7 +33,7 @@ Run
 -----------------------
 Start the server as www-data or apache user.
 `cd /var/www/node-deploy-hook`
-`sudo -Hu www-data nohup node deploy.js > ./log/deploy.log 2>&1&`
+`sudo -Hu www-data nohup node deploy-hook.js > ./log/deploy.log 2>&1&`
 
 
 Contribute

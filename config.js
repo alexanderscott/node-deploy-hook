@@ -1,7 +1,7 @@
 module.exports = {
     email: {
-        sendOnSuccess: true,
-        sendOnError: true,
+        sendOnSuccess: false,
+        sendOnError: false,
         to: "example@example.com",
         from: "node-deploy-hook",
         subjectOnSuccess: "Successfully updated repository",

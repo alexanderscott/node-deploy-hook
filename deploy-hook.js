@@ -12,7 +12,7 @@ var express = require('express'),
     path = require("path"),
 
     app = express(),
-    config = require('../config'),
+    config = require('./config'),
 
     // port can be optionally configured (8888 by default)
     server = http.createServer(app).listen( config.port );

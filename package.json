@@ -1,5 +1,5 @@
 {
-  "name": "node-deploy-hook",
+  "name": "deploy-hook",
   "keywords": "node, deploy, service hook",
   "description": "Lightweight Node.JS deployer to be used with Bitbucket or Github POST service hooks",
   "version": "0.1.0",
@@ -8,7 +8,7 @@
     "nodemailer": "~0.5.2"
   },
   "engines": ["node >=0.4.0"],
-  "main" : "./lib/node-deploy-hook",
+  "main" : "./deploy-hook",
   "licenses" : [
     {
       "type" : "MIT",
