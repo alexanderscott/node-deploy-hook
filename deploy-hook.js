@@ -53,17 +53,26 @@ var sendMail = function(message){
 };
 
 app.all("/deploy", function(req, res){
-    var projectDir = path.normalize(req.params.project ? config.serverRoot+req.params.project : __dirname),
+    var projectDir,
         remoteBranch = req.params.remote_branch || 'origin',
         localBranch = req.params.local_branch || 'master',
         deployJSON;
 
-    var deploy = childprocess.exec("cd "+projectDir+" && git pull "+remoteBranch+" "+localBranch, function(err, stdout, stderr){
+
+    if(req.body && req.body.repository && req.body.repository.name){        // POST request made by github service hook, use the repo name
+        projectDir = path.normalize(config.serverRoot+req.body.repository.name);
+    } else if(req.params.project){                                          // GET request made thru nginx proxy, use the appended project GET param
+        projectDir = path.normalize(config.serverRoot+req.params.project); 
+    } else {                                                                // Else assume it is this repo or installed here, and was hit directly
+        projectDir = __dirname;                             
+    }
+
+    var deploy = childprocess.exec("cd "+projectDir+" && git stash && git pull "+remoteBranch+" "+localBranch, function(err, stdout, stderr){
         if(err){
-            deployJSON = { subject: config.email.subjectOnError, message: "Error pulling down remote repository:: \n"+err, error: true  };
+            deployJSON = { error: true, subject: config.email.subjectOnError, message: err };
             if(config.email.sendOnError) sendMail( deployJSON );
         } else {
-            deployJSON = { subject: config.email.subjectOnSuccess, message: "Success pulling down remote repository:: \n"+stdout, success: true };
+            deployJSON = { success: true, subject: config.email.subjectOnSuccess, message: stdout  };
             if(config.email.sendOnSuccess) sendMail( deployJSON );
         }
 
