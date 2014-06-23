@@ -61,8 +61,8 @@ app.all("/deploy", function(req, res){
 
     if(req.body && req.body.repository && req.body.repository.name){        // POST request made by github service hook, use the repo name
         projectDir = path.normalize(config.serverRoot+req.body.repository.name);
-    } else if(req.params.project){                                          // GET request made thru nginx proxy, use the appended project GET param
-        projectDir = path.normalize(config.serverRoot+req.params.project); 
+    } else if(req.query.project){                                          // GET request made thru nginx proxy, use the appended project GET param
+        projectDir = path.normalize(config.serverRoot+req.query.project); 
     } else {                                                                // Else assume it is this repo or installed here, and was hit directly
         projectDir = __dirname;                             
     }
