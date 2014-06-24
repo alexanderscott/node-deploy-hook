@@ -58,16 +58,17 @@ app.all("/deploy", function(req, res){
         localBranch = req.params.local_branch || 'master',
         deployJSON;
 
+	var payload = JSON.parse(req.body.payload);
 
-    if(req.body && req.body.repository && req.body.repository.name){        // POST request made by github service hook, use the repo name
-        projectDir = path.normalize(config.serverRoot+req.body.repository.name);
+    if(payload && payload.repository && payload.repository.name){        // POST request made by github service hook, use the repo name
+        projectDir = path.normalize(config.serverRoot+payload.repository.name);
     } else if(req.query.project){                                          // GET request made thru nginx proxy, use the appended project GET param
         projectDir = path.normalize(config.serverRoot+req.query.project); 
     } else {                                                                // Else assume it is this repo or installed here, and was hit directly
         projectDir = __dirname;                             
     }
 
-    var deploy = childprocess.exec("cd "+projectDir+" && git stash && git pull "+remoteBranch+" "+localBranch, function(err, stdout, stderr){
+    var deploy = childprocess.exec("cd "+projectDir+" && git stash && git reset --hard "+remoteBranch+"/"+localBranch, function(err, stdout, stderr){
         if(err){
             deployJSON = { error: true, subject: config.email.subjectOnError, message: err };
             if(config.email.sendOnError) sendMail( deployJSON );
