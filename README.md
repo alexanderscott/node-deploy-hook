@@ -2,6 +2,10 @@ node-deploy-hook
 =======================
 A super simple, lightweight Node.JS deployer to be used with Bitbucket or Github POST service hooks.
 
+my fork notes 
+=======================
+* Gitbucket hook is now working properly
+* Git pull replaced to git reset --hard
 
 Install
 -----------------------
