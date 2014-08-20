@@ -56,9 +56,12 @@ app.all("/deploy", function(req, res){
     var projectDir,
         remoteBranch = req.params.remote_branch || 'origin',
         localBranch = req.params.local_branch || 'master',
-        deployJSON;
+        deployJSON, payload, ok;
 
-	var payload = JSON.parse(req.body.payload);
+	ok = true;
+
+if(req.body.payload)
+	payload = JSON.parse(req.body.payload);
 
     if(payload && payload.repository && payload.repository.name){        // POST request made by github service hook, use the repo name
         projectDir = path.normalize(config.serverRoot+payload.repository.name);
@@ -66,9 +69,12 @@ app.all("/deploy", function(req, res){
         projectDir = path.normalize(config.serverRoot+req.query.project); 
     } else {                                                                // Else assume it is this repo or installed here, and was hit directly
         projectDir = __dirname;                             
+	res.end('Invalid request');
+	ok = false;
     }
 
-    var deploy = childprocess.exec("cd "+projectDir+" && git stash && git reset --hard "+remoteBranch+"/"+localBranch, function(err, stdout, stderr){
+if(ok) {
+    var deploy = childprocess.exec("cd "+projectDir+" && git stash && git pull "+remoteBranch+" "+localBranch, function(err, stdout, stderr){
         if(err){
             deployJSON = { error: true, subject: config.email.subjectOnError, message: err };
             if(config.email.sendOnError) sendMail( deployJSON );
@@ -79,6 +85,7 @@ app.all("/deploy", function(req, res){
 
         res.json( deployJSON );
     });
+};
 });
 
 console.log((new Date()).toString()+ ":: Node-deploy-hook server listening on port::", config.port, ", environment:: ", app.settings.env);
