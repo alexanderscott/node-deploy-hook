@@ -4,7 +4,7 @@ A super simple, lightweight Node.JS deployer to be used with Bitbucket or Github
 
 my fork notes - What's new ?
 =======================
-* Gitbucket hook is now working properly
+* Bitbucket hook is now working properly
 * Git pull replaced to git reset --hard
 * ... More is coming ...
 
