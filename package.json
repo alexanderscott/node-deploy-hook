@@ -3,7 +3,7 @@
   "name": "deploy-hook",
   "keywords": "node, deploy, service hook",
   "description": "Lightweight Node.JS deployer to be used with Bitbucket or Github POST service hooks",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "repository": {
       "url": "https://github.com/alexanderscott/node-deploy-hook"
   },
