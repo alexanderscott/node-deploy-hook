@@ -2,6 +2,11 @@ node-deploy-hook
 =======================
 A super simple, lightweight Node.JS deployer to be used with Bitbucket or Github POST service hooks.
 
+my fork notes - What's new ?
+=======================
+* Bitbucket hook is now working properly
+* Git pull replaced to git reset --hard
+* ... More is coming ...
 
 Install
 -----------------------
@@ -29,13 +34,12 @@ For example in nginx, you could add:
     }
 
 
+Nginx Configuration Example
+-----------------------
+todo
+
 Run
 -----------------------
 Start the server as www-data or apache user.
 `cd /var/www/node-deploy-hook`
 `sudo -Hu www-data nohup node deploy-hook.js > ./log/deploy.log 2>&1&`
-
-
-Contribute
------------------------
-Fork + Pull-Request, please.
