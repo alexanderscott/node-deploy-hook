@@ -2,6 +2,8 @@ node-deploy-hook
 =======================
 A super simple, lightweight Node.JS deployer to be used with Bitbucket or Github POST service hooks.
 
+[![NPM](https://nodei.co/npm/deploy-hook.png?downloads=true)](https://nodei.co/npm/deploy-hook/)
+
 
 Install
 -----------------------
@@ -22,7 +24,8 @@ Install the repo as www-data (for nginx) or apache user:
 ```
 sudo -Hu www-data npm install --save node-deploy-hook
 ```
-    or
+
+or
 
 ```
 sudo -Hu www-data git clone https://github.com/alexanderscott/node-deploy-hook 
