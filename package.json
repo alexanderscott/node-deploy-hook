@@ -1,22 +1,24 @@
 {
-  "author": "Alex Ehrnschwender",
+  "author": "Alex Ehrnschwender <alexanderscott46@gmail.com> (https://ehrns.com)",
   "name": "deploy-hook",
   "keywords": "node, deploy, service hook",
   "description": "Lightweight Node.JS deployer to be used with Bitbucket or Github POST service hooks",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "repository": {
-      "url": "https://github.com/alexanderscott/node-deploy-hook"
+    "url": "https://github.com/alexanderscott/node-deploy-hook"
   },
   "dependencies": {
-    "express": "~3.4.0",
-    "nodemailer": "~0.5.2"
+    "express": ">=3.11.0",
+    "nodemailer": ">=6.2.1"
   },
-  "engines": ["node >=0.4.0"],
-  "main" : "./deploy-hook",
-  "licenses" : [
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "main": "./deploy-hook",
+  "licenses": [
     {
-      "type" : "MIT",
-      "url" : "https://github.com/alexanderscott/node-deploy-hook/raw/master/LICENSE"
+      "type": "MIT",
+      "url": "https://github.com/alexanderscott/node-deploy-hook/raw/master/LICENSE"
     }
   ]
 }

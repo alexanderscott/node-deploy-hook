@@ -1,5 +1,7 @@
 node-deploy-hook
 =======================
+[![NPM version](https://badge.fury.io/js/deploy-hook.svg)](http://badge.fury.io/js/deploy-hook)
+
 A super simple, lightweight Node.JS deployer to be used with Bitbucket or Github POST service hooks.
 
 [![NPM](https://nodei.co/npm/deploy-hook.png?downloads=true)](https://nodei.co/npm/deploy-hook/)
@@ -22,7 +24,7 @@ cd node-deploy-hook && npm install
 
 Install the repo as www-data (for nginx) or apache user:
 ```
-sudo -Hu www-data npm install --save node-deploy-hook
+sudo -Hu www-data npm install --save deploy-hook
 ```
 
 or
@@ -55,7 +57,10 @@ sudo -Hu www-data nohup node deploy-hook.js > ./log/deploy.log 2>&1&
 
 Change Log
 ----------------------
-v1.0.1
+v0.1.2
+* Update npm packages to fix security vulnerabilities
+
+v0.1.1
 * Bitbucket hook is now working properly
 * Git pull replaced to git reset --hard
 
